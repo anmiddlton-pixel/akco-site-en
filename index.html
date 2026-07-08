@@ -770,17 +770,12 @@ function sub(){
   var SPEED=1.0; // скорость hero-видео (ускорение уже «зашито» в файл)
   a.playbackRate=SPEED; b.playbackRate=SPEED;
   var cur=a, nxt=b, switching=false;
-  // autoplay пускает видео сразу (для мобильных надёжнее) — тормозим и держим первый кадр 2 c
-  try{ a.pause(); a.currentTime=0; }catch(e){}
+  // Надёжный старт: autoplay + резервный play() + фолбэк на первый жест (без паузы, чтобы не ломать автоплей)
   function heroGesture(){ a.play().catch(function(){}); }
-  setTimeout(function(){
-    a.currentTime=0;
-    var pr=a.play();
-    // если браузер всё же заблокировал автоплей — стартуем по первому касанию/клику/скроллу
-    if(pr&&pr.catch){ pr.catch(function(){
-      ['touchstart','click','scroll'].forEach(function(ev){document.addEventListener(ev,heroGesture,{once:true,passive:true});});
-    }); }
-  }, 2000);
+  var pr=a.play();
+  if(pr&&pr.catch){ pr.catch(function(){
+    ['touchstart','click','scroll'].forEach(function(ev){document.addEventListener(ev,heroGesture,{once:true,passive:true});});
+  }); }
   function watch(){
     if(cur.duration && cur.currentTime >= cur.duration - FADE && !switching){
       switching=true;
