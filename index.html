@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden}
 body{font-family:'Montserrat',sans-serif;background:#eaeaea;color:#1c1c1c;overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none}
 a{text-decoration:none;color:inherit}
 ul{list-style:none}
@@ -147,7 +147,9 @@ nav.sc .burger span{background:#1c1c1c}
 .hi.d1{animation-delay:.15s}.hi.d2{animation-delay:.35s}.hi.d3{animation-delay:.55s}.hi.d4{animation-delay:.75s}
 @keyframes fu{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:680px){
-  .hc{left:24px;bottom:100px}
+  .hc{left:20px;right:20px;top:auto;bottom:104px;transform:none;max-width:none}
+  .hd{max-width:none}
+  .schi{display:none}
   .hwm,.htitle{display:none}
 }
 
@@ -588,7 +590,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 56p
 <div class="ctaw" id="contacts">
   <div class="ew rv"><div class="ewl"></div><span>Contacts</span></div>
   <h2 class="st rv d1"><span>Get in touch</span><br><strong>with the Group</strong></h2>
-  <p class="sd rv d2" style="max-width:none;white-space:nowrap">International office — Dubai, UAE. We reply within 4 business hours.</p>
+  <p class="sd rv d2" style="max-width:none">International office — Dubai, UAE. We reply within 4 business hours.</p>
   <div class="cgrid4">
     <a class="ccard rv" href="tel:88437177717">
       <span class="ccard-tx"><span class="ccard-l">Phone</span><span class="ccard-v">8 843 717-77-17</span></span>
