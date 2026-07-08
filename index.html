@@ -392,7 +392,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 56p
     <video class="hbg-vid" id="hbgA" muted playsinline autoplay preload="auto" poster="assets_Beige/hero-poster.jpg" style="opacity:1">
       <source src="assets_Beige/video/0709.mp4" type="video/mp4">
     </video>
-    <video class="hbg-vid" id="hbgB" muted playsinline preload="auto">
+    <video class="hbg-vid" id="hbgB" muted playsinline preload="none">
       <source src="assets_Beige/video/0709.mp4" type="video/mp4">
     </video>
   </div>
@@ -557,10 +557,10 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 56p
 <!-- БЛОГ -->
 <section id="blog" class="cardsec">
   <div class="blog-bg">
-    <video class="blog-vid" id="blogA" muted playsinline poster="assets_Beige/bg-cta-light.png" style="opacity:1">
+    <video class="blog-vid" id="blogA" muted playsinline preload="none" poster="assets_Beige/bg-cta-light.png" style="opacity:1">
       <source src="assets_Beige/video/hero.mp4" type="video/mp4">
     </video>
-    <video class="blog-vid" id="blogB" muted playsinline>
+    <video class="blog-vid" id="blogB" muted playsinline preload="none">
       <source src="assets_Beige/video/hero.mp4" type="video/mp4">
     </video>
   </div>
@@ -613,10 +613,10 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 56p
 <div class="ctaw" id="order">
   <div class="ctai rv">
     <div class="cta-bg">
-      <video class="cta-vid" id="ctaA" muted playsinline poster="assets_Beige/bg-akcore-light.png" style="opacity:1">
+      <video class="cta-vid" id="ctaA" muted playsinline preload="none" poster="assets_Beige/bg-akcore-light.png" style="opacity:1">
         <source src="assets_Beige/video/kling_20260707_VIDEO_The_bird_f_5353_0.mp4" type="video/mp4">
       </video>
-      <video class="cta-vid" id="ctaB" muted playsinline>
+      <video class="cta-vid" id="ctaB" muted playsinline preload="none">
         <source src="assets_Beige/video/kling_20260707_VIDEO_The_bird_f_5353_0.mp4" type="video/mp4">
       </video>
     </div>
@@ -806,7 +806,8 @@ function sub(){
   if(!a||!b) return;
   var FADE=1.2;
   var cur=a, nxt=b, switching=false;
-  a.play().catch(function(){});
+  // ленивый старт: грузим и играем только когда блок близко к экрану
+  new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){a.play().catch(function(){});o.disconnect();}});},{rootMargin:'300px'}).observe(document.getElementById('order'));
   function watch(){
     if(cur.duration && cur.currentTime >= cur.duration - FADE && !switching){
       switching=true;
@@ -835,7 +836,8 @@ function sub(){
   if(!a||!b) return;
   var FADE=1.2;
   var cur=a, nxt=b, switching=false;
-  a.play().catch(function(){});
+  // ленивый старт: грузим и играем только когда блок близко к экрану
+  new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){a.play().catch(function(){});o.disconnect();}});},{rootMargin:'300px'}).observe(document.getElementById('blog'));
   function watch(){
     if(cur.duration && cur.currentTime >= cur.duration - FADE && !switching){
       switching=true;
